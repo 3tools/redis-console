@@ -1,5 +1,7 @@
 package cn.tools3.redis.console.security;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +19,7 @@ public class CurrentUserDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
+	@Transactional
 	public CurrentUser loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.debug("加载用户[{}]", username);
 		User user = userRepository.findByUsername(username);
