@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				// 无需授权目录
 				.antMatchers("/bower_components/**", "/build/**", "/dist/**", "/documentation/**", "/pages/**",
-						"/plugins/**", "/index.html", "/index2.html", "/starter.html")
+						"/plugins/**", "/index.html", "/index2.html", "/starter.html", "jquery.spring-friendly.js")
 				.permitAll()
 				// 其它需要授权
 				.anyRequest().authenticated();
@@ -82,7 +82,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						pm = m;
 					}
 					if (null != pm.getParent()) {
-						pm.setParent(menuRepository.findOne(pm.getParent().getId()));
+						Menu parent = menuRepository.findOne(pm.getParent().getId());
+						if (null != parent) {
+							pm.setParent(parent);
+						}
 					}
 					menuRepository.save(pm);
 				});
@@ -142,9 +145,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public List<Menu> menuList() {
 		List<Menu> l = new ArrayList<>();
+		// 首页
 		Menu parentHomeMenu = new Menu("home", null, "首页", "", 0);
-		l.add(new Menu("home.home", parentHomeMenu, "首页v1", "/", 40));
 		l.add(parentHomeMenu);
+		l.add(new Menu("home.home", parentHomeMenu, "首页v1", "/", 40));
+		// 配置管理
+		Menu parentConfigMenu = new Menu("config", null, "配置管理", "", 10);
+		l.add(parentConfigMenu);
+		l.add(new Menu("config.server", parentConfigMenu, "服务器管理", "/server/list", 40));
 		// 系统管理
 		Menu parentSystemMenu = new Menu("system", null, "系统管理", "", 50);
 		l.add(parentSystemMenu);

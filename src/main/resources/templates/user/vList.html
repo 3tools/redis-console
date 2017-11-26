@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/vHead :: head">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<header th:replace="fragment/vHeader :: header"></header>
+		<aside th:replace="fragment/vSideBar :: sideBar"></aside>
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					用户管理 <small>用户列表</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+					<li class="active">用户管理</li>
+				</ol>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">用户列表</h3>
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary">
+										新建</button>
+
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="example2" class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>id</th>
+											<th>名称</th>
+											<th>host</th>
+											<th>配置</th>
+											<th>描述</th>
+										</tr>
+									</thead>
+									<tbody>
+
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<footer th:replace="fragment/vFooter :: footer"></footer>
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- js lib -->
+	<div th:replace="fragment/vJsLib :: jsLib"></div>
+	<!-- page script -->
+	<script>
+		$(function() {
+			$('#example2').DataTable({
+				'ajax' : 'datatable',
+				'serverSide' : true,
+				'paging' : true,
+				'lengthChange' : false,
+				'searching' : false,
+				'ordering' : true,
+				'info' : true
+			})
+		})
+	</script>
+</body>
+</html>

@@ -7,6 +7,9 @@ import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,6 +25,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(indexes = { @Index(columnList = "lastModified") })
+@Where(clause = "remove = false")
+@SQLDelete(sql = " update menu set remove = true, last_modified = now() where id = ?")
 public class Menu extends BaseDomain {
 
 	public Menu(String id,Menu parent, String name, String path,int sequence) {
