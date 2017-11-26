@@ -1,8 +1,10 @@
 package cn.tools3.redis.console.security;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -15,9 +17,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import cn.tools3.redis.console.domain.Menu;
 import cn.tools3.redis.console.domain.Resource;
 import cn.tools3.redis.console.domain.Role;
 import cn.tools3.redis.console.domain.User;
+import cn.tools3.redis.console.repository.MenuRepository;
 import cn.tools3.redis.console.repository.ResourceRepository;
 import cn.tools3.redis.console.repository.RoleRepository;
 import cn.tools3.redis.console.repository.UserRepository;
@@ -54,21 +58,54 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public CommandLineRunner run(RoleRepository roleRepository, ResourceRepository resourceRepository,
-			UserRepository userRepository) throws Exception {
+			MenuRepository menuRepository, UserRepository userRepository) throws Exception {
 		return new CommandLineRunner() {
 
 			@Override
 			public void run(String... args) throws Exception {
+				// 添加资源列表
+				resourceList().forEach(r -> {
+					Resource pr = resourceRepository.findOne(r.getId());
+					if (null != pr) {
+						BeanUtils.copyProperties(r, pr, "id");
+					} else {
+						pr = r;
+					}
+					resourceRepository.save(pr);
+				});
+				// 添加菜单列表
+				menuList().forEach(m -> {
+					Menu pm = menuRepository.findOne(m.getId());
+					if (null != pm) {
+						BeanUtils.copyProperties(m, pm, "id");
+					} else {
+						pm = m;
+					}
+					if (null != pm.getParent()) {
+						pm.setParent(menuRepository.findOne(pm.getParent().getId()));
+					}
+					menuRepository.save(pm);
+				});
+
 				if (!roleRepository.findAll().iterator().hasNext()) {
 					// 初始化Role
-					@SuppressWarnings("unchecked")
-					List<Resource> resources = IteratorUtils.toList(resourceRepository.findAll().iterator());
 					Role role = new Role();
-					role.setName("管理员(全部)");
+					role.setName("admin");
 					role.setDescription("后台管理员账户");
-					role.setResources(resources);
 					roleRepository.save(role);
 				}
+				roleRepository.findAll().forEach(r -> {
+					if ("admin".equals(r.getName())) {
+						// 初始化Role
+						@SuppressWarnings("unchecked")
+						List<Resource> resources = IteratorUtils.toList(resourceRepository.findAll().iterator());
+						@SuppressWarnings("unchecked")
+						List<Menu> menus = IteratorUtils.toList(menuRepository.findAll().iterator());
+						r.setResources(resources);
+						r.setMenus(menus);
+						roleRepository.save(r);
+					}
+				});
 
 				if (!userRepository.findAll().iterator().hasNext()) {
 					// 添加用户
@@ -93,7 +130,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Bean
 	public List<Resource> resourceList() {
-		return null;
+		List<Resource> l = new ArrayList<>();
+		return l;
+	}
+
+	/**
+	 * 资源列表，修改慎重，注意历史数据
+	 *
+	 * @returns
+	 */
+	@Bean
+	public List<Menu> menuList() {
+		List<Menu> l = new ArrayList<>();
+		Menu parentHomeMenu = new Menu("home", null, "首页", "", 0);
+		l.add(new Menu("home.home", parentHomeMenu, "首页v1", "/", 40));
+		l.add(parentHomeMenu);
+		// 系统管理
+		Menu parentSystemMenu = new Menu("system", null, "系统管理", "", 50);
+		l.add(parentSystemMenu);
+		l.add(new Menu("system.user", parentSystemMenu, "用户管理", "/user/userInfo", 40));
+		l.add(new Menu("system.role", parentSystemMenu, "角色管理", "/role/roleInfo", 50));
+		l.add(new Menu("system.log", parentSystemMenu, "操作日志", "/userLog/userLogInfo", 80));
+		return l;
 	}
 
 }

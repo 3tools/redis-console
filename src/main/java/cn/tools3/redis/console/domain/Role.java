@@ -37,5 +37,11 @@ public class Role extends BaseDomain {
 	 */
 	@OneToMany
 	private List<Resource> resources;
+	
+	/**
+	 * 授权的菜单
+	 */
+	@OneToMany
+	private List<Menu> menus;
 
 }
