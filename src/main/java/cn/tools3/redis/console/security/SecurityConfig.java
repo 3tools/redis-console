@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				// 无需授权目录
 				.antMatchers("/bower_components/**", "/build/**", "/dist/**", "/documentation/**", "/pages/**",
-						"/plugins/**", "/index.html", "/index2.html", "/starter.html", "jquery.spring-friendly.js")
+						"/plugins/**", "/index.html", "/index2.html", "/starter.html", "jquery.spring-friendly.js","/css/**","/img/common/**")
 				.permitAll()
 				// 其它需要授权
 				.anyRequest().authenticated();
