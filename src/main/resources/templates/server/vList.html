@@ -25,7 +25,7 @@
 							<div class="box-header">
 								<h3 class="box-title">服务器列表</h3>
 								<div class="btn-group">
-									<button type="button" class="btn btn-primary">
+									<button type="button" class="btn btn-primary" onclick="addServers();">
 										新建</button>
 
 								</div>
@@ -74,9 +74,22 @@
 				'lengthChange' : false,
 				'searching' : false,
 				'ordering' : true,
-				'info' : true
+				'info' : true,
+                "language": Chinese_lang
 			})
 		})
-	</script>
+
+        function addServers() {
+            layer.open({
+                type: 2,
+                title: '添加服务器',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['700px', '50%'],
+                content: 'add'
+            });
+        }
+
+    </script>
 </body>
 </html>

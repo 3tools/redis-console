@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/vHead :: head">
+    <meta charset="UTF-8" />
+    <title>添加服务器</title>
+</head>
+<body>
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">单台服务器</li>
+        <li>批量服务器</li>
+    </ul>
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">单台服务器</div>
+        <div class="layui-tab-item">批量服务器批量服务器批量服务器批量服务器批量服务器</div>
+    </div>
+</div>
+</body>
+<div th:replace="fragment/vJsLib :: jsLib"></div>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+        // todo
+    });
+</script>
+</html>
