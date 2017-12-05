@@ -93,7 +93,7 @@
                     newDate.setTime(row.lastModified);
                     return newDate.toLocaleString();
                 }},
-                {render : function(data,type,row) {
+                {searchable:false,orderable:false,render : function(data,type,row) {
                     return "<a>修改</a>";
                 }}
             ]
