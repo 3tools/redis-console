@@ -68,14 +68,12 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 		</dependency>
-		<!-- metrics for Os -->
-		<!-- execute shell command by ssh2 -->
 		<dependency>
-			<groupId>com.jcraft</groupId>
-			<artifactId>jsch</artifactId>
-			<version>0.1.54</version>
+			<groupId>com.jcabi</groupId>
+			<artifactId>jcabi-ssh</artifactId>
+			<version>1.6</version>
 		</dependency>
-		<!-- metrics for Os -->
+
 
 		<!-- test -->
 		<dependency>
