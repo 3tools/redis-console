@@ -16,11 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/metrics")
 public class ServerMetricsController {
+
     private static final Logger logger = LoggerFactory.getLogger(ServerMetricsController.class);
 
     @RequestMapping("/serverInfo")
     public ModelAndView serverInfo() {
-        //todo:
-        return null;
+
+        return new ModelAndView("metrics/workspace/vSys");
     }
 }

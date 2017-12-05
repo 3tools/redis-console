@@ -21,7 +21,6 @@ public class RedisMetricsController {
 
     @RequestMapping("/redisInfo")
     public ModelAndView listRedisServer() {
-        //todo:
-        return null;
+        return new ModelAndView("metrics/redis/vRedis");
     }
 }
