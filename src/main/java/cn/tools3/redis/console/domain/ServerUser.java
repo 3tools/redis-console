@@ -34,7 +34,7 @@ public class ServerUser extends BaseDomain {
      * 用户名
      */
     @JsonView({ DataTablesOutput.View.class, Server.class })
-    private String userName;
+    private String username;
 
     /**
      * 密码

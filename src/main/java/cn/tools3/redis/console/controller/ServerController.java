@@ -2,6 +2,7 @@ package cn.tools3.redis.console.controller;
 
 import cn.tools3.redis.console.domain.Server;
 import cn.tools3.redis.console.repository.ServerRepository;
+import cn.tools3.redis.console.repository.ServerUserRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -21,15 +22,11 @@ public class ServerController {
     @Autowired
     private ServerRepository serverRepository;
 
+    @Autowired
+    private ServerUserRepository serverUserRepository;
+
     @RequestMapping(value = "/list")
     public String list() {
-        Server server =  new Server();
-        server.setDescribe("不花大萨达所");
-        server.setHost("192.168.2.2");
-        server.setName("哈哈哈");
-        server.setCreateTime(new Date());
-        server.setLastModified(new Date());
-        serverRepository.save(server);
         return "server/vList";
     }
 
@@ -49,7 +46,14 @@ public class ServerController {
     @RequestMapping(value = "/save")
     @Transactional
     public String save(Server server) {
+        server.setCreateTime(new Date());
+        server.setLastModified(new Date());
+        server.getUsers().forEach(user ->{
+            user.setCreateTime(new Date());
+            user.setLastModified(new Date());
+        });
         serverRepository.save(server);
+        serverUserRepository.save(server.getUsers());
         return "redirect:/server/list";
     }
 

@@ -5,87 +5,67 @@
     <title>添加服务器</title>
 </head>
 <body>
-<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-
-    <ul class="layui-tab-title">
-        <li class="layui-this">单台服务器</li>
-        <li>批量服务器</li>
-    </ul>
-
-    <div class="layui-tab-content">
-
-        <div class="layui-tab-item layui-show">
-            <div class="col-md-6">
-                <form class="form-horizontal">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="inputIP" class="col-sm-2 control-label">IP地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputIP" placeholder="IP地址" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputUserName" class="col-sm-2 control-label">用户</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="用户" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-sm-2 control-label">密码</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputPassword" placeholder="密码" />
-                            </div>
-                        </div>
-                    </div>
-                </form>
+<div class="box box-info">
+    <form class="form-horizontal" id="form-form" action="save" method="post">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="name" placeholder="名称" />
+                </div>
+                <label class="col-sm-2 control-label">HOST</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="host" placeholder="IP地址" />
+                </div>
+                <label class="col-sm-2 control-label">描述</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="describe" placeholder="服务器描述" />
+                </div>
             </div>
-        </div>
 
-
-        <div class="layui-tab-item">
-            <div class="col-md-6">
-                <form class="form-horizontal">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="inputIPstart" class="col-sm-2 control-label">IP地址</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="inputIPstart" placeholder="起始IP" />
-                            </div>
-                            <label for="inputIPend" class="col-sm-2 control-label">至</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="inputIPend" placeholder="截止IP" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputUserName" class="col-sm-2 control-label">用户</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="用户" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-sm-2 control-label">密码</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputPassword" placeholder="密码" />
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
+            <!-- 添加服务器SSH登录用户,多个 -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="users[0].username" placeholder="用户名" />
+                </div>
+                <label class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="users[0].password" placeholder="密码" />
+                </div>
             </div>
+
         </div>
-    </div>
+    </form>
 </div>
 <div class="box-footer">
-    <button type="submit" class="btn btn-default">取消</button>
-    <button type="submit" class="btn btn-info pull-right">保存</button>
+    <button class="btn btn-default" style="float: right;margin-left: 1em;" onclick="closeWindow()">取消</button>
+    <button class="btn btn-info pull-right" onclick="save()">保存</button>
 </div>
 </body>
 <div th:replace="fragment/vJsLib :: jsLib"></div>
 <script>
+    // 关闭窗口
+    function closeWindow() {
+        var index= parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+
+    // 保存
+    function save() {
+        var msg = layer.msg("请稍后。。。");
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url:"save",
+            data:$('#form-form').serialize(),
+            async: false,
+            success: function(data) {
+                closeWindow();
+            }
+        });
+        
+    }
     layui.use('element', function(){
         var element = layui.element;
         // todo

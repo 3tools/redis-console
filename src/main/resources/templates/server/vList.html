@@ -64,7 +64,7 @@
 <!-- page script -->
 <script>
     $(function() {
-        $('#configTable').DataTable({
+        var table = $('#configTable').DataTable({
             "ajax" : 'datatable',
             "serverSide" : true,
             "paging": true,
@@ -93,12 +93,12 @@
                     newDate.setTime(row.lastModified);
                     return newDate.toLocaleString();
                 }},
-                {searchable:false,orderable:false,render : function(data,type,row) {
+                {searchable:false,orderable:false,render : function(data, type,row){
                     return "<a>修改</a>";
                 }}
             ]
-        })
-    })
+        });
+    });
 
     function addServers() {
         layer.open({
@@ -106,7 +106,7 @@
             title: '添加服务器',
             shadeClose: true,
             shade: 0.8,
-            area: ['700px', '50%'],
+            area: ['750px', '65%'],
             content: 'add'
         });
     }
