@@ -69,10 +69,11 @@
 			<artifactId>commons-collections</artifactId>
 		</dependency>
 		<!-- metrics for Os -->
+		<!-- execute shell command by ssh2 -->
 		<dependency>
-			<groupId>org.fusesource</groupId>
-			<artifactId>sigar</artifactId>
-			<version>1.6.4</version>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
 		</dependency>
 		<!-- metrics for Os -->
 
