@@ -107,7 +107,10 @@
             shadeClose: true,
             shade: 0.8,
             area: ['750px', '65%'],
-            content: 'add'
+            content: 'add',
+            end: function () {
+                location.reload();
+            }
         });
     }
 

@@ -53,7 +53,6 @@
 
     // 保存
     function save() {
-        var msg = layer.msg("请稍后。。。");
         $.ajax({
             cache: true,
             type: "POST",
@@ -62,13 +61,13 @@
             async: false,
             success: function(data) {
                 closeWindow();
+                layer.msg('保存成功', {icon: 1})
+            },
+            error:function () {
+                layer.msg('保存失败',{icon:2})
             }
         });
         
     }
-    layui.use('element', function(){
-        var element = layui.element;
-        // todo
-    });
 </script>
 </html>

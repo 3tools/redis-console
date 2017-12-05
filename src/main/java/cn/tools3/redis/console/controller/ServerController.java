@@ -44,11 +44,13 @@ public class ServerController {
     }
 
     @RequestMapping(value = "/save")
+    @ResponseBody
     @Transactional
     public String save(Server server) {
         server.setCreateTime(new Date());
         server.setLastModified(new Date());
         server.getUsers().forEach(user ->{
+            user.setServer(server);
             user.setCreateTime(new Date());
             user.setLastModified(new Date());
         });

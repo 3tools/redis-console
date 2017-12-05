@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
@@ -45,6 +47,7 @@ public class Server extends BaseDomain {
      */
     @JsonView({ DataTablesOutput.View.class })
     @OneToMany(mappedBy = "server")
+    @NotFound(action= NotFoundAction.IGNORE)
     private List<ServerUser> users;
 
 

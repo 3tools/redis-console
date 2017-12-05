@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
@@ -28,6 +30,7 @@ public class ServerUser extends BaseDomain {
      */
     @JsonView({ DataTablesOutput.View.class })
     @ManyToOne
+    @NotFound(action= NotFoundAction.IGNORE)
     private Server server;
 
     /**
