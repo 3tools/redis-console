@@ -26,20 +26,20 @@ public class ServerUser extends BaseDomain {
     /**
      * 服务器
      */
-    @JsonView({ DataTablesOutput.View.class, Server.class })
+    @JsonView({ DataTablesOutput.View.class })
     @ManyToOne
     private Server server;
 
     /**
      * 用户名
      */
-    @JsonView({ DataTablesOutput.View.class, Server.class })
+    @JsonView({ DataTablesOutput.View.class})
     private String username;
 
     /**
      * 密码
      */
-    @JsonView({ DataTablesOutput.View.class, Server.class })
+    @JsonView({ DataTablesOutput.View.class })
     private String password;
 
 }
