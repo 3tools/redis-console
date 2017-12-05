@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cn.tools3.redis</groupId>
-	<artifactId>console</artifactId>
+	<artifactId>redis-console</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
