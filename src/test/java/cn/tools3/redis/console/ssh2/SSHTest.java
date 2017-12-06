@@ -49,7 +49,8 @@ public class SSHTest {
     @Test
     public void secondTest() {
         Shell shell = null;
-        String command = "top -b -n 1";
+        String command = "/usr/local/redis/src/redis-cli";
+        String redisCommand = "info memory";
         try {
             shell = new SshByPassword(ip, port, userName, password);
             String stdout = new Shell.Plain(shell).exec(command);

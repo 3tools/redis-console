@@ -20,7 +20,7 @@ public class RedisMetricsController {
     private static final Logger logger = LoggerFactory.getLogger(ServerMetricsController.class);
 
     @RequestMapping("/redisInfo")
-    public ModelAndView listRedisServer() {
-        return new ModelAndView("metrics/redis/vRedis");
+    public String listRedisServer() {
+        return "metrics/redis/vRedis";
     }
 }
