@@ -20,8 +20,8 @@ public class ServerMetricsController {
     private static final Logger logger = LoggerFactory.getLogger(ServerMetricsController.class);
 
     @RequestMapping("/serverInfo")
-    public ModelAndView serverInfo() {
+    public String serverInfo() {
 
-        return new ModelAndView("metrics/workspace/vSys");
+        return "metrics/workspace/vSys";
     }
 }
