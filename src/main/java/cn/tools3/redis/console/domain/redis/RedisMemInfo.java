@@ -1,4 +1,4 @@
-package cn.tools3.redis.console.domain;
+package cn.tools3.redis.console.domain.redis;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +29,7 @@ import lombok.ToString;
  * mem_allocator:jemalloc-4.0.3
  * 192.168.10114:6379>
  *
- * todo:待server信息维护好以后直接将下面的部分属性换成server对象
+ * todo:待server信息维护好以后直接将下面的generi对象里的部分属性换成server对象
  * @since : 1.0
  */
 @Getter
@@ -38,24 +38,9 @@ import lombok.ToString;
 public class RedisMemInfo {
 
     /**
-     * redis服务器
+     * 基本信息
      */
-    private String host;
-
-    /**
-     * 服务器名称
-     */
-    private String name;
-
-    /**
-     * 服务器ip
-     */
-    private String ip;
-
-    /**
-     * 占用端口(可能出现伪多实例的情况，如一台物理机开启多个端口redis)
-     */
-    private int port;
+    private RedisGenericInfo genericInfo;
 
     /**
      * redis使用的内存总量
