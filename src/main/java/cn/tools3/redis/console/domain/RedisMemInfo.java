@@ -1,5 +1,9 @@
 package cn.tools3.redis.console.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * @author :  renhuan
  * @email : blentle.huan.ren@gmail.com
@@ -28,6 +32,9 @@ package cn.tools3.redis.console.domain;
  * todo:待server信息维护好以后直接将下面的部分属性换成server对象
  * @since : 1.0
  */
+@Getter
+@Setter
+@ToString
 public class RedisMemInfo {
 
     /**
