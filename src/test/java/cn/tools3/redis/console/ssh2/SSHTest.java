@@ -1,7 +1,12 @@
 package cn.tools3.redis.console.ssh2;
 
+import com.jcabi.ssh.Shell;
+import com.jcabi.ssh.SshByPassword;
 import com.jcraft.jsch.JSchException;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 /**
  * @author :  renhuan
@@ -14,9 +19,12 @@ public class SSHTest {
 
     private final String ip = "192.168.10.110";
 
-    private final String userName="root";
+    private final int port = 22;
 
-    private final String password ="unioncast.cn";
+    private final String userName = "root";
+
+    private final String password = "unioncast.cn";
+
     @Test
     public void firstTest() {
         try {
@@ -34,6 +42,21 @@ public class SSHTest {
                 e.printStackTrace();
             }
         } catch (JSchException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void secondTest() {
+        Shell shell = null;
+        String command = "top -b -n 1";
+        try {
+            shell = new SshByPassword(ip, port, userName, password);
+            String stdout = new Shell.Plain(shell).exec(command);
+            System.err.println(stdout);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
