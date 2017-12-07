@@ -162,8 +162,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 状态监控
 		Menu parentMetricsMenu = new Menu("metrics", null, "状态监控", "", 60);
 		l.add(parentMetricsMenu);
-		l.add(new Menu("metrics.server", parentMetricsMenu, "服务器监控", "/metrics/serverInfo", 40));
-		l.add(new Menu("metrics.redis", parentMetricsMenu, "redis监控", "/metrics/redisInfo", 50));
+		l.add(new Menu("metrics.server", parentMetricsMenu, "服务器监控", "/server/metrics/info", 40));
+		l.add(new Menu("metrics.redis", parentMetricsMenu, "redis监控", "/redis/metrics/info", 50));
 		return l;
 	}
 

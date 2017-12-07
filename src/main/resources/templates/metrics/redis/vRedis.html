@@ -1,82 +1,176 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragment/vHead :: head">
+    <style></style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
-		<header th:replace="fragment/vHeader :: header"></header>
-		<aside th:replace="fragment/vSideBar :: sideBar"></aside>
-		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>
-					用户管理 <small>用户列表</small>
-				</h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-					<li class="active">用户管理</li>
-				</ol>
-			</section>
-			<!-- Main content -->
-			<section class="content">
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="box">
-							<div class="box-header">
-								<h3 class="box-title">用户列表</h3>
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary">
-										新建</button>
+<div class="wrapper">
+    <header th:replace="fragment/vHeader :: header"></header>
+    <aside th:replace="fragment/vSideBar :: sideBar"></aside>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                状态监控
+                <small>Redis实例监控</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">Redis实例监控</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-solid">
+                        <div class="box-header">
+                            <i class="fa fa-bar-chart-o"></i>
 
-								</div>
-							</div>
-							<!-- /.box-header -->
-							<div class="box-body">
-								<table id="example2" class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>id</th>
-											<th>名称</th>
-											<th>host</th>
-											<th>配置</th>
-											<th>描述</th>
-										</tr>
-									</thead>
-									<tbody>
+                            <h3 class="box-title">基本信息</h3>
 
-									</tbody>
-								</table>
-							</div>
-							<!-- /.box-body -->
-						</div>
-						<!-- /.box -->
-					</div>
-					<!-- /.col -->
-				</div>
-				<!-- /.row -->
-			</section>
-			<!-- /.content -->
-		</div>
-		<!-- /.content-wrapper -->
-		<footer th:replace="fragment/vFooter :: footer"></footer>
-	</div>
-	<!-- /#wrapper -->
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" data-widget="remove"><i
+                                        class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <!-- ./col -->
+                                <div class="col-xs-6 col-md-2 text-center">
+                                    <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2"
+                                           data-angleArc="250" data-angleOffset="-125" data-width="120"
+                                           data-height="120" data-fgColor="#00c0ef"/>
 
-	<!-- js lib -->
-	<div th:replace="fragment/vJsLib :: jsLib"></div>
-	<!-- page script -->
-	<script>
-		$(function() {
-			$('#example2').DataTable({
-				'ajax' : 'datatable',
-				'serverSide' : true,
-				'paging' : true,
-				'lengthChange' : false,
-				'searching' : false,
-				'ordering' : true,
-				'info' : true
-			})
-		})
-	</script>
+                                    <div class="knob-label">已使用内存</div>
+                                </div>
+                                <!-- ./col -->
+                                <!-- ./col -->
+                                <div class="col-xs-6 col-md-2 text-center">
+                                    <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2"
+                                           data-angleArc="250" data-angleOffset="-125" data-width="120"
+                                           data-height="120" data-fgColor="#00c0ef"/>
+
+                                    <div class="knob-label">Key的总数</div>
+                                </div>
+                                <!-- ./col -->
+                                <!-- ./col -->
+                                <div class="col-xs-6 col-md-2 text-center">
+                                    <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2"
+                                           data-angleArc="250" data-angleOffset="-125" data-width="120"
+                                           data-height="120" data-fgColor="#00c0ef"/>
+
+                                    <div class="knob-label">客户端数</div>
+                                </div>
+                                <!-- ./col -->
+                                <!-- ./col -->
+                                <div class="col-xs-6 col-md-2 text-center">
+                                    <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2"
+                                           data-angleArc="250" data-angleOffset="-125" data-width="120"
+                                           data-height="120" data-fgColor="#00c0ef"/>
+
+                                    <div class="knob-label">已处理命令数</div>
+                                </div>
+                                <!-- ./col -->
+                                <!-- ./col -->
+                                <div class="col-xs-6 col-md-2 text-center">
+                                    <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2"
+                                           data-angleArc="250" data-angleOffset="-125" data-width="120"
+                                           data-height="120" data-fgColor="#00c0ef"/>
+
+                                    <div class="knob-label">UpTime</div>
+                                </div>
+                                <!-- ./col -->
+                                <!-- ./col -->
+                                <div class="col-xs-6 col-md-2 text-center">
+                                    <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2"
+                                           data-angleArc="250" data-angleOffset="-125" data-width="120"
+                                           data-height="120" data-fgColor="#00c0ef"/>
+
+                                    <div class="knob-label">data-angleArc="250"</div>
+                                </div>
+                                <!-- ./col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer th:replace="fragment/vFooter :: footer"></footer>
+</div>
+<!-- /#wrapper -->
+
+<!-- js lib -->
+<div th:replace="fragment/vJsLib :: jsLib"></div>
+<!-- page script -->
+<script>
+    $(function () {
+        /* jQueryKnob */
+
+        $(".knob").knob({
+            change: function (value) {
+                //console.log("change : " + value);
+            },
+            release: function (value) {
+                console.log("release : " + value);
+            },
+            cancel: function () {
+                console.log("cancel : " + this.value);
+            },
+            draw: function () {
+
+                // "tron" case
+                if (this.$.data('skin') == 'tron') {
+
+                    var a = this.angle(this.cv)  // Angle
+                        , sa = this.startAngle          // Previous start angle
+                        , sat = this.startAngle         // Start angle
+                        , ea                            // Previous end angle
+                        , eat = sat + a                 // End angle
+                        , r = true;
+
+                    this.g.lineWidth = this.lineWidth;
+
+                    /*<![CDATA[*/this.o.cursor && (sat = eat - 0.3) && (eat = eat + 0.3);/*]]>*/
+
+                    if (this.o.displayPrevious) {
+                        ea = this.startAngle + this.angle(this.value);
+                        /*<![CDATA[*/this.o.cursor && (sa = ea - 0.3) && (ea = ea + 0.3);/*]]>*/
+                        this.g.beginPath();
+                        this.g.strokeStyle = this.previousColor;
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
+                        this.g.stroke();
+                    }
+
+                    this.g.beginPath();
+                    this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
+                    this.g.stroke();
+
+                    this.g.lineWidth = 2;
+                    this.g.beginPath();
+                    this.g.strokeStyle = this.o.fgColor;
+                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                    this.g.stroke();
+
+                    return false;
+                }
+            }
+        });
+        /* END JQUERY KNOB */
+    });
+</script>
 </body>
 </html>
