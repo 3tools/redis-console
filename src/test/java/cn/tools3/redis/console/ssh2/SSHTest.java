@@ -3,10 +3,16 @@ package cn.tools3.redis.console.ssh2;
 import com.jcabi.ssh.Shell;
 import com.jcabi.ssh.SshByPassword;
 import com.jcraft.jsch.JSchException;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * @author :  renhuan
@@ -25,16 +31,43 @@ public class SSHTest {
 
     private final String password = "unioncast.cn";
 
+    private Connection c;
+    private Statement stmt;
+
+    @Before
+    public void before() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:./db/data.db");
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @After
+    public void after() {
+        try {
+            stmt.close();
+            c.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Test
     public void firstTest() {
         try {
             //使用目标服务器机上的用户名和密码登陆
             SSHHelper helper = new SSHHelper(ip, 22, userName, password);
             //String command = "echo hello world!";
-            String command = "top -b -n 1";
+            String command = "/usr/redis/redis-3.2.8/src/redis-cli info";
             try {
                 SSHResInfo resInfo = helper.sendCmd(command);
-                System.out.println(resInfo.toString());
+                System.out.println("我擦，这是啥:");
+                System.out.println(resInfo.getOutRes());
                 //System.out.println(helper.deleteRemoteFIleOrDir(command));
                 //System.out.println(helper.detectedFileExist(command));
                 helper.close();
